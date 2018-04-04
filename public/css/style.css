@@ -1,19 +1,14 @@
 #nav {
     background-color: #990000;
     border: 0px;
-    height: 50px;
+    height: 70px;
 }
 
+.nav {
+  background-color: #990000
+}
 .navbar {
     border: 0 !important;
-}
-
-#nav a {
-    color: #F1BE48;
-}
-
-#nav a:hover {
-    color: #F1BE48;
 }
 
 body {
@@ -26,22 +21,42 @@ body, tfoot {
 }
 
 a, a:hover {
-    color: #990000;
+  color: #990000;
 }
 
 .container {
     margin-top: 70px;
-    margin-left: 30px;
+    margin-left: 15px;
     margin-right: 15px;
     width: auto;
 }
 
 .breadcrumb {
     background-color: #990000;
-    color: white;
     height: 50px;
-    margin: 0px;
+    margin: 10px;
     padding: 15px;
+}
+
+.breadcrumb li {
+  background-color: #990000;
+  color: white;
+}
+
+#btn-login {
+  background-color: #fff;
+  border-color: #fff;
+  height: 50px;
+  margin: 10px;
+  padding: 15px;
+  width: 100px;
+}
+
+#btn-login:hover {
+  background-color: grey;
+  background-color: #fff;
+
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4);
 }
 
 .btn-primary {
@@ -60,24 +75,6 @@ a, a:hover {
 
 .panel-default {
     cursor: pointer;
-}
-
-.pagination>li>a {
-    border: 1px solid #990000;
-}
-.pagination>li.active>a {
-    border: 1px solid #990000 !important;
-    background-color: #990000 !important;
-    color: #fff !important;
-}
-.pagination>li>a:hover, .pagination>li.active>a:hover {
-    background-color: #990000;
-    border-color: #990000;
-    color: white;
-}
-
-.pagination>li>a{
-    color: #990000;
 }
 
 .list {

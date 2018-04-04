@@ -1,9 +1,21 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
   <div id="nav" class="container-fluid">
-    <ol class="breadcrumb">
-      <li><span class="active">Dashboard</span></li>
-    </ol>
-  </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div>
+      <ul class="nav navbar-nav">
+        <li>
+          <ol class="breadcrumb">
+            <li><span class="active">Dashboard</span></li>
+          </ol>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a id="btn-login" ng-controller="logoutController" ng-click='logout()' class="btn btn-default">Logout</a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
   <div class="row">
@@ -30,6 +42,23 @@
           </div>
         </div>
       </accordion>
+    </div>
+    <div class="col-sm-offset-1 col-sm-5">
+      <h3>Site Map</h3>
+      <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}">
+        <ng-map class="map" default-style="true" zoom="3" center="35, -95">
+          <info-window id="infoWindow">
+            <div ng-non-bindable>
+              <a href="#">{{ selectedSite.name }}</a>
+              <br/>
+            </div>
+          </info-window>
+          <marker ng-repeat="s in sites"
+                  position="{{s.lat}},{{s.lng}}" title="{{s.name}}"
+                  id="{{s.id}}" on-click="showSite(event, s)">
+          </marker>
+        </ng-map>
+      </div>
     </div>
   </div>
 </div>

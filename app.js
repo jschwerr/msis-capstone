@@ -5,12 +5,24 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressSession = require('express-session');
+const mongoose = require('mongoose');
+const hash = require('bcrypt-nodejs');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
 
-const routes = require('./routes');
+const api = require('./routes/api.js');
+const user = require('./routes/user.js');
 
 const app = express();
 
 const env = process.env.NODE_ENV || 'development';
+
+// mongoose
+mongoose.connect('mongodb://localhost/capstone-app');
+// user schema/model
+const User = require('./models/user.js');
+
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
@@ -26,9 +38,26 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+// configure passport
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// handle routing
+app.use('/user/', user);
+app.use('/api/', api);
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 /// catch 404 and forward to error handler
 app.use((req, res, next) => {
