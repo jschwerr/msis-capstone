@@ -1,0 +1,35 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div id="nav" class="container-fluid">
+    <ol class="breadcrumb">
+      <li><span class="active">Dashboard</span></li>
+    </ol>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <h1>Sites</h1>
+      <accordion close-others="true">
+        <div accordion-group ng-repeat="s in sites">
+          <div accordion-heading>
+              <div>
+                {{s.name}}
+                <div class="pull-right">
+                <!--random number generator adapted from: https://stackoverflow.com/questions/19737594/angularjs-how-to-generate-random-value-for-each-ng-repeat-iteration-->
+                <span class="text-center">
+                    1 <div class="health-circle circle-green"></div>
+                    2 <div class="health-circle circle-yellow"></div>
+                    1 <div class="health-circle circle-red"></div>
+                </span>
+                <a style="margin-left: 15px;" class="pull-right" ng-href="/site/{{s.id}}" ng-click="$event.stopPropagation()">View Site</a>
+                </div>
+              </div>
+          </div>
+          <div>
+            {{s.status}}
+          </div>
+        </div>
+      </accordion>
+    </div>
+  </div>
+</div>
